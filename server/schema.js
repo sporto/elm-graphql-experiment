@@ -1,18 +1,34 @@
-var gql = require('graphql')
+var g = require('graphql')
 
-let count = 0;
+var ClientType = new g.GraphQLObjectType({
+  name: 'Client',
+  fields: {
+	id: { type: g.GraphQLInt },
+	name: { type: g.GraphQLString },
+  }
+});
 
-let schema = new gql.GraphQLSchema({
-  query: new gql.GraphQLObjectType({
-    name: 'RootQueryType',
-    fields: {
-      count: {
-        type: gql.GraphQLInt,
-        resolve: function() {
-          return count;
-        }
-      }
-    }
+var clients = {
+	1:  {
+		id: 1,
+		name: "Name"
+	}
+}
+
+var schema = new g.GraphQLSchema({
+  query: new g.GraphQLObjectType({
+	name: 'RootQueryType',
+	fields: {
+	  client: {
+		type: ClientType,
+		args: {
+			id: { type: g.GraphQLInt }
+		},
+		resolve: function(_, args) {
+			return clients[args.id];
+		}
+	  }
+	}
   })
 });
 
