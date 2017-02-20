@@ -116,20 +116,10 @@ update msg model =
 
 query =
     """query {
-    client(id: 1) {
-        name
-        awsAccountsOrOnboardings(first: 200) {
-            edges {
-                node {
-                    id
-                    sourceId
-                    createdAt
-                    updatedAt
-                }
-            }
+        client(id: 1) {
+            name
         }
     }
-}
 """
 
 
@@ -139,14 +129,13 @@ query =
 
 sendQueryRequest =
     let
-        jsonBody =
-            Encode.object [ ( "query", typedQuery |> fieldsToString |> Encode.string ) ]
-
+        -- jsonBody =
+        --     Encode.object [ ( "query", query |> Encode.string ) ]
         body =
-            Http.jsonBody jsonBody
+            Http.stringBody "application/graphql" query
 
         url =
-            "http://localhost:3001/graphql"
+            "http://localhost:3000/graphql"
     in
         Http.request
             { method = "POST"

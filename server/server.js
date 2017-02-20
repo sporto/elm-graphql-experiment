@@ -3,8 +3,11 @@ var schema = require('./schema')
 
 var gql = require('graphql')
 var bodyParser = require('body-parser')
+var cors = require('cors')
 var app  = express();
 var PORT = 3000;
+
+app.use(cors())
 
 // parse POST body as text
 app.use(bodyParser.text({ type: 'application/graphql' }));
