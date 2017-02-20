@@ -1,0 +1,12 @@
+{
+  "name": "elm-graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "elm-live": "^2.7.4"
+  },
+  "scripts": {
+    "start": "elm-live src/Main.elm"
+  }
+}
